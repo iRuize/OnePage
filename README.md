@@ -66,7 +66,7 @@ Database（sys_user 表）
 | 层 | 技术 |
 |----|------|
 | 后端 | JDK 8、Spring Boot 2.7.17、Spring MVC、Bean Validation |
-| 持久层 | MyBatis-Plus 3.5.4 + H2 2.1.214（文件模式） |
+| 持久层 | MyBatis-Plus 3.5.4 + 达梦 DM8（DmJdbcDriver18） |
 | 认证 | PBKDF2WithHmacSHA256 密码摘要 + HMAC-SHA256 无状态 Token |
 | 前端 | 原生 HTML / CSS / JavaScript（无构建、无框架） |
 
@@ -81,7 +81,16 @@ mvn spring-boot:run
 
 服务默认监听 `http://localhost:8080`。
 
-首次启动会自动创建 H2 数据库文件 `backend/data/love.mv.db`，并执行 `db/schema.sql` 建表。
+后端连接本地达梦数据库（`jdbc:dm://localhost:5236`，默认模式 `SOFTDEMO`），启动时执行 `db/schema.sql` 自动建表。
+
+**首次部署前置条件**（以 SYSDBA 在达梦管理工具中执行一次）：
+
+```sql
+-- 见 backend/src/main/resources/db/init-dm.sql
+CREATE SCHEMA SOFTDEMO AUTHORIZATION SYSDBA;
+```
+
+若 `SOFTDEMO` 模式已存在，可忽略此步骤。
 
 ### 2. 启动前端
 
@@ -157,11 +166,28 @@ curl http://localhost:8080/api/auth/me \
 
 ## 数据库
 
+项目连接本地达梦数据库 DM8，默认模式 `SOFTDEMO`。
+
+**连接信息**（详见 `backend/src/main/resources/application.yml`）：
+
+| 项 | 值 |
+|----|----|
+| 驱动类 | `dm.jdbc.driver.DmDriver` |
+| JDBC URL | `jdbc:dm://localhost:5236?schema=SOFTDEMO` |
+| 用户名 | `SYSDBA` |
+| 密码 | `Duohereshui1` |
+| 模式 | `SOFTDEMO` |
+
+**初始化步骤**：
+
+1. 首次部署执行 `backend/src/main/resources/db/init-dm.sql`，创建 `SOFTDEMO` 模式（已存在则跳过）；
+2. 启动应用，自动执行 `db/schema.sql` 建表（`IF NOT EXISTS` 幂等）。
+
 建表脚本：`backend/src/main/resources/db/schema.sql`
 
 ```sql
 CREATE TABLE IF NOT EXISTS sys_user (
-    id            BIGINT       AUTO_INCREMENT PRIMARY KEY,
+    id            BIGINT       IDENTITY(1, 1) NOT NULL PRIMARY KEY,
     username      VARCHAR(20)  NOT NULL,
     nickname      VARCHAR(32),
     avatar        VARCHAR(16),
@@ -172,15 +198,8 @@ CREATE TABLE IF NOT EXISTS sys_user (
 );
 ```
 
-H2 控制台可按需开启（默认关闭）：
-
-```yaml
-spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-```
+> 达梦使用 `IDENTITY(1,1)` 实现自增主键，不兼容 MySQL 的 `AUTO_INCREMENT`。
+> 若 `SOFTDEMO` 模式尚未创建，应用连接会失败，请先执行 `db/init-dm.sql`。
 
 ## 配置项
 
@@ -189,9 +208,9 @@ spring:
 | 配置 | 默认值 | 说明 |
 |------|--------|------|
 | `server.port` | `8080` | 服务端口 |
-| `spring.datasource.url` | `jdbc:h2:file:./data/love` | H2 数据库文件地址 |
-| `spring.datasource.username` | `sa` | 数据库用户名 |
-| `spring.datasource.password` | 空 | 数据库密码 |
+| `spring.datasource.url` | `jdbc:dm://localhost:5236?schema=SOFTDEMO` | 达梦连接地址（可用 `DM_URL` 覆盖） |
+| `spring.datasource.username` | `SYSDBA` | 数据库用户名（可用 `DM_USERNAME` 覆盖） |
+| `spring.datasource.password` | `Duohereshui1` | 数据库密码（可用 `DM_PASSWORD` 覆盖） |
 | `spring.sql.init.schema-locations` | `classpath:db/schema.sql` | 建表脚本 |
 | `love.auth.secret` | 演示密钥 | Token 签名密钥，生产环境务必替换 |
 | `love.auth.token-ttl-hours` | `168` | Token 有效期（小时），勾选「记住我」为 4 倍 |
@@ -206,13 +225,13 @@ spring:
 - **登录态传递**：前端将 Token 存入 `localStorage`，通过 `Authorization: Bearer` 请求头传递。
 - **游戏联动**：登录成功后，前端会把昵称与头像同步到游戏档案，进入游戏即为当前账号身份。
 
-## 切换为 MySQL
+## 切换为其他数据库
 
 三层结构已把数据库访问隔离在 `dao` 层，切换成本很低：
 
-1. `pom.xml` 将 H2 依赖替换为 `mysql-connector-java`；
-2. `application.yml` 修改 `spring.datasource` 为 MySQL 地址与账号；
-3. 将 `db/schema.sql` 中的类型调整为 MySQL 语法（`BIGINT AUTO_INCREMENT` 已兼容）。
+1. `pom.xml` 替换 JDBC 驱动依赖；
+2. `application.yml` 修改 `spring.datasource` 的驱动类、URL、账号与连接检测语句；
+3. 调整 `db/schema.sql` 中与达梦方言相关的部分（主要是 `IDENTITY(1,1)` 自增写法）。
 
 Controller、Service、Entity 均无需改动。
 

@@ -9,17 +9,26 @@ spring:
   application:
     name: love-backend
   datasource:
-    driver-class-name: org.h2.Driver
-    # 文件模式：数据持久化到 backend/data/love.mv.db
-    url: jdbc:h2:file:./data/love;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password: ""
+    # 达梦数据库（DM8），默认模式 SOFTDEMO
+    driver-class-name: dm.jdbc.driver.DmDriver
+    url: "${DM_URL:jdbc:dm://localhost:5236?schema=SOFTDEMO}"
+    username: ${DM_USERNAME:SYSDBA}
+    password: ${DM_PASSWORD:Duohereshui1}
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      # 达梦连接有效性检测
+      connection-test-query: SELECT 1 FROM DUAL
   sql:
     init:
       # 每次启动执行建表脚本，脚本内使用 IF NOT EXISTS 保证幂等
       mode: always
       schema-locations: classpath:db/schema.sql
       continue-on-error: false
+      encoding: UTF-8
   jackson:
     default-property-inclusion: non_null
 
