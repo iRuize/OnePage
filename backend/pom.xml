@@ -38,6 +38,13 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+        <!-- Lombok：以注解替代 getter / setter 等样板代码 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- JDBC 数据源 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

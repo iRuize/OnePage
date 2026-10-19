@@ -16,8 +16,8 @@ love/
 │       │   ├── controller/               【控制层】REST 接口
 │       │   ├── service/                  【服务层】业务接口
 │       │   ├── service/impl/             【服务层】业务实现
-│       │   ├── dao/                      【数据访问层】数据库连接（MyBatis-Plus Mapper）
-│       │   ├── entity/                   数据库实体
+│       │   ├── mapper/                   【数据访问层】MyBatis-Plus Mapper
+│       │   ├── po/                       持久化对象（PO，对应数据库表）
 │       │   ├── dto/                      请求 / 响应对象
 │       │   ├── config/                   登录拦截器、CORS / MVC 配置
 │       │   ├── common/                   统一响应、业务异常、全局异常处理
@@ -50,22 +50,22 @@ Controller（控制层）
     ↓ 接收请求、参数校验、返回统一响应
 Service（服务层，接口 + 实现）
     ↓ 业务规则：注册查重、密码校验、Token 签发
-DAO（数据访问层）
-    ↓ MyBatis-Plus BaseMapper，访问 H2 数据库
-Database（sys_user 表）
+Mapper（数据访问层）
+    ↓ MyBatis-Plus BaseMapper，访问达梦数据库
+Database（SOFTDEMO.sys_user 表）
 ```
 
 | 层 | 代码位置 | 职责 |
 |----|----------|------|
 | 控制层 | `controller/AuthController` | 路由、`@Valid` 校验、响应封装 |
 | 服务层 | `service/AuthService` + `service/impl/AuthServiceImpl` | 认证业务逻辑 |
-| 数据访问层 | `dao/UserDao` | 继承 `BaseMapper<User>`，由框架生成 CRUD |
+| 数据访问层 | `mapper/UserMapper` | 继承 `BaseMapper<User>`，由框架生成 CRUD |
 
 ## 技术栈
 
 | 层 | 技术 |
 |----|------|
-| 后端 | JDK 8、Spring Boot 2.7.17、Spring MVC、Bean Validation |
+| 后端 | JDK 8、Spring Boot 2.7.17、Spring MVC、Bean Validation、Lombok |
 | 持久层 | MyBatis-Plus 3.5.4 + 达梦 DM8（DmJdbcDriver18） |
 | 认证 | PBKDF2WithHmacSHA256 密码摘要 + HMAC-SHA256 无状态 Token |
 | 前端 | 原生 HTML / CSS / JavaScript（无构建、无框架） |
@@ -123,6 +123,12 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
 **IntelliJ IDEA 导入**
 
 根目录已提供聚合 `pom.xml`。用 IDEA 打开项目根目录，等待 Maven 自动导入；若未自动触发，点击 Maven 面板的 **Reload All Maven Projects** 即可。
+
+**Lombok 注解未生效**
+
+项目使用 Lombok 的 `@Data` / `@Getter` 等注解生成 getter、setter。IDEA 需要安装 **Lombok** 插件，并开启注解处理：
+
+`Settings → Build, Execution, Deployment → Compiler → Annotation Processors → 勾选 Enable annotation processing`
 
 **端口不一致**
 
@@ -227,7 +233,7 @@ CREATE TABLE IF NOT EXISTS sys_user (
 
 ## 切换为其他数据库
 
-三层结构已把数据库访问隔离在 `dao` 层，切换成本很低：
+三层结构已把数据库访问隔离在 `mapper` 层，切换成本很低：
 
 1. `pom.xml` 替换 JDBC 驱动依赖；
 2. `application.yml` 修改 `spring.datasource` 的驱动类、URL、账号与连接检测语句；

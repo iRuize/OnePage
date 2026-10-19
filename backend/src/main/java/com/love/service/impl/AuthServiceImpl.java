@@ -2,12 +2,12 @@ package com.love.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.love.common.BizException;
-import com.love.dao.UserDao;
 import com.love.dto.LoginRequest;
 import com.love.dto.LoginResponse;
 import com.love.dto.RegisterRequest;
 import com.love.dto.UserVO;
-import com.love.entity.User;
+import com.love.mapper.UserMapper;
+import com.love.po.User;
 import com.love.service.AuthService;
 import com.love.util.PasswordUtil;
 import com.love.util.TokenUtil;
@@ -30,11 +30,11 @@ public class AuthServiceImpl implements AuthService {
             "💘", "💖", "💗", "💕", "😊", "🐻", "🐰", "🐱", "🦊", "🍓", "🌸", "🌙"
     );
 
-    private final UserDao userDao;
+    private final UserMapper userMapper;
     private final TokenUtil tokenUtil;
 
-    public AuthServiceImpl(UserDao userDao, TokenUtil tokenUtil) {
-        this.userDao = userDao;
+    public AuthServiceImpl(UserMapper userMapper, TokenUtil tokenUtil) {
+        this.userMapper = userMapper;
         this.tokenUtil = tokenUtil;
     }
 
@@ -53,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPasswordHash(PasswordUtil.hash(request.getPassword()));
         user.setCreatedAt(now);
         user.setLastLoginAt(now);
-        userDao.insert(user);
+        userMapper.insert(user);
 
         return buildResponse(user, false);
     }
@@ -65,13 +65,13 @@ public class AuthServiceImpl implements AuthService {
             throw new BizException(401, "用户名或密码错误");
         }
         user.setLastLoginAt(System.currentTimeMillis());
-        userDao.updateById(user);
+        userMapper.updateById(user);
         return buildResponse(user, request.isRemember());
     }
 
     @Override
     public UserVO getCurrentUser(Long userId) {
-        User user = userDao.selectById(userId);
+        User user = userMapper.selectById(userId);
         if (user == null) {
             throw new BizException(401, "登录状态已失效，请重新登录");
         }
@@ -89,14 +89,14 @@ public class AuthServiceImpl implements AuthService {
     private boolean existsUsername(String username) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>()
                 .apply("LOWER(username) = {0}", username.toLowerCase());
-        return userDao.selectCount(wrapper) > 0;
+        return userMapper.selectCount(wrapper) > 0;
     }
 
     private User findByUsername(String username) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>()
                 .apply("LOWER(username) = {0}", username.toLowerCase())
                 .last("LIMIT 1");
-        return userDao.selectOne(wrapper);
+        return userMapper.selectOne(wrapper);
     }
 
     private LoginResponse buildResponse(User user, boolean remember) {

@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 1.0.0
  */
 @SpringBootApplication
-@MapperScan("com.love.dao")
+@MapperScan("com.love.mapper")
 public class LoveApplication {
 
     public static void main(String[] args) {

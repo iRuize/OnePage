@@ -1,5 +1,7 @@
 package com.love.dto;
 
+import lombok.Data;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -10,6 +12,7 @@ import javax.validation.constraints.Size;
  * @author 邸睿泽
  * @since 1.0.0
  */
+@Data
 public class RegisterRequest {
 
     @NotBlank(message = "请输入用户名")
@@ -22,28 +25,4 @@ public class RegisterRequest {
 
     @Size(max = 16, message = "昵称最多 16 个字符")
     private String nickname;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
 }
