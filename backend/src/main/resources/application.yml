@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+
+spring:
+  application:
+    name: love-backend
+  datasource:
+    driver-class-name: org.h2.Driver
+    # 文件模式：数据持久化到 backend/data/love.mv.db
+    url: jdbc:h2:file:./data/love;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: ""
+  sql:
+    init:
+      # 每次启动执行建表脚本，脚本内使用 IF NOT EXISTS 保证幂等
+      mode: always
+      schema-locations: classpath:db/schema.sql
+      continue-on-error: false
+  jackson:
+    default-property-inclusion: non_null
+
+# MyBatis-Plus 数据访问层配置
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+love:
+  auth:
+    # 生产环境请替换为环境变量注入的随机密钥
+    secret: ${LOVE_AUTH_SECRET:love-heart-catch-demo-secret-change-me-in-production}
+    token-ttl-hours: 168
+
+logging:
+  level:
+    com.love: info

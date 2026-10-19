@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f8ff">
+    <title>心动捕捉 · 登录</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+    <canvas id="bg" class="bg-canvas" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+    </div>
+
+    <main class="shell">
+        <!-- ================= 左侧品牌区 ================= -->
+        <section class="brand">
+            <div class="brand-top">
+                <div class="logo-mark">💘</div>
+                <span class="logo-text">HeartCatch</span>
+            </div>
+
+            <h1>让每一次<br><em>心跳</em>都被记录</h1>
+            <p class="brand-sub">
+                接住心动，躲避心碎。用一个轻盈的账号，收藏你的每一局恋爱结局。
+            </p>
+
+            <ul class="features">
+                <li><span class="fi">✨</span><span>实时战绩与心动档案</span></li>
+                <li><span class="fi">💗</span><span>五种结局，等你解锁</span></li>
+                <li><span class="fi">🌙</span><span>随时继续，进度不丢</span></li>
+            </ul>
+
+            <div class="brand-art" aria-hidden="true">
+                <div class="art-glow"></div>
+                <svg class="heart-glass" viewBox="0 0 220 220">
+                    <defs>
+                        <linearGradient id="heartGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ffc4dd"/>
+                            <stop offset="48%" stop-color="#ff85bb"/>
+                            <stop offset="100%" stop-color="#7b6cf6"/>
+                        </linearGradient>
+                        <linearGradient id="heartHi" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="rgba(255,255,255,.9)"/>
+                            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="heart-path"
+                          d="M110 196C110 196 22 138 22 80C22 44 49 24 75 24C92 24 104 36 110 52C116 36 128 24 145 24C171 24 198 44 198 80C198 138 110 196 110 196Z"
+                          fill="url(#heartGrad)"/>
+                    <ellipse cx="72" cy="62" rx="25" ry="15" fill="url(#heartHi)"
+                             transform="rotate(-28 72 62)"/>
+                    <circle cx="86" cy="150" r="6" fill="rgba(255,255,255,.5)"/>
+                </svg>
+                <div class="float-chip chip-1">连击 ×12</div>
+                <div class="float-chip chip-2">💍 命中注定</div>
+                <div class="float-chip chip-3">+10 心动</div>
+            </div>
+        </section>
+
+        <!-- ================= 右侧登录卡片 ================= -->
+        <section class="auth-card" id="authCard">
+            <!-- 登录 / 注册 -->
+            <div id="authView" class="view">
+                <header class="card-head">
+                    <div class="card-badge">💗</div>
+                    <h2 class="card-title" id="cardTitle">欢迎回来</h2>
+                    <p class="card-sub" id="cardSub">登录你的账号，继续心动旅程</p>
+                </header>
+
+                <div class="segmented" id="segmented" data-active="login">
+                    <span class="seg-slider"></span>
+                    <button type="button" class="seg-btn active" data-tab="login">登录</button>
+                    <button type="button" class="seg-btn" data-tab="register">注册</button>
+                </div>
+
+                <!-- 登录表单 -->
+                <form id="loginForm" class="form" novalidate>
+                    <div class="field" id="loginUserField">
+                        <span class="field-icon">👤</span>
+                        <div class="field-main">
+                            <input id="loginUser" name="username" type="text" placeholder=" "
+                                   autocomplete="username" maxlength="20">
+                            <label for="loginUser">用户名</label>
+                        </div>
+                    </div>
+
+                    <div class="field" id="loginPassField">
+                        <span class="field-icon">🔒</span>
+                        <div class="field-main">
+                            <input id="loginPass" name="password" type="password" placeholder=" "
+                                   autocomplete="current-password" maxlength="32">
+                            <label for="loginPass">密码</label>
+                        </div>
+                        <button type="button" class="eye" data-target="loginPass"
+                                aria-label="显示或隐藏密码">👁</button>
+                    </div>
+
+                    <div class="row-between">
+                        <label class="check">
+                            <input type="checkbox" id="remember" checked>
+                            <span class="box"></span>记住我
+                        </label>
+                        <span class="link-muted">安全登录 · 密码加盐摘要</span>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="loginBtn">
+                        <span class="btn-text">登 录</span>
+                        <span class="spinner"></span>
+                    </button>
+
+                    <p class="form-tip">
+                        还没有账号？
+                        <button type="button" class="link" data-goto="register">立即注册</button>
+                    </p>
+                </form>
+
+                <!-- 注册表单 -->
+                <form id="registerForm" class="form" hidden novalidate>
+                    <div class="field" id="regUserField">
+                        <span class="field-icon">👤</span>
+                        <div class="field-main">
+                            <input id="regUser" name="username" type="text" placeholder=" "
+                                   autocomplete="username" maxlength="20">
+                            <label for="regUser">用户名（3-20 位字母数字下划线）</label>
+                        </div>
+                    </div>
+
+                    <div class="field" id="regNickField">
+                        <span class="field-icon">🏷️</span>
+                        <div class="field-main">
+                            <input id="regNick" name="nickname" type="text" placeholder=" "
+                                   autocomplete="nickname" maxlength="16">
+                            <label for="regNick">昵称（选填）</label>
+                        </div>
+                    </div>
+
+                    <div class="field" id="regPassField">
+                        <span class="field-icon">🔒</span>
+                        <div class="field-main">
+                            <input id="regPass" name="password" type="password" placeholder=" "
+                                   autocomplete="new-password" maxlength="32">
+                            <label for="regPass">密码（6-32 位）</label>
+                        </div>
+                        <button type="button" class="eye" data-target="regPass"
+                                aria-label="显示或隐藏密码">👁</button>
+                    </div>
+
+                    <div class="field" id="regPass2Field">
+                        <span class="field-icon">🔐</span>
+                        <div class="field-main">
+                            <input id="regPass2" name="confirm" type="password" placeholder=" "
+                                   autocomplete="new-password" maxlength="32">
+                            <label for="regPass2">确认密码</label>
+                        </div>
+                        <button type="button" class="eye" data-target="regPass2"
+                                aria-label="显示或隐藏密码">👁</button>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="registerBtn">
+                        <span class="btn-text">创建账号</span>
+                        <span class="spinner"></span>
+                    </button>
+
+                    <p class="form-tip">
+                        已有账号？
+                        <button type="button" class="link" data-goto="login">直接登录</button>
+                    </p>
+                </form>
+            </div>
+
+            <!-- 已登录 -->
+            <div id="welcomeView" class="welcome" hidden>
+                <div class="welcome-avatar" id="welcomeAvatar">🐻</div>
+                <h2>欢迎回来，<span id="welcomeName">心动玩家</span></h2>
+                <p>你的心动旅程还在继续</p>
+                <button type="button" class="btn-primary" id="continueBtn">
+                    <span class="btn-text">继续心动</span>
+                    <span class="spinner"></span>
+                </button>
+                <button type="button" class="btn-ghost" id="logoutBtn">退出登录</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
+    <div class="success-overlay" id="successOverlay" aria-hidden="true">
+        <div class="success-heart">💘</div>
+        <div class="success-title">登录成功</div>
+        <div class="success-sub">正在进入你的心动世界…</div>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/bg.js"></script>
+    <script src="assets/js/login.js"></script>
+</body>
+</html>
