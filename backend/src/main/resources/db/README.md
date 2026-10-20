@@ -16,8 +16,8 @@
 
 ## 初始化
 
-1. 首次部署执行 `init-dm.sql`，创建 `SOFTDEMO` 模式（已存在则跳过）；
-2. 启动应用，自动执行 `schema.sql` 建表（`IF NOT EXISTS` 幂等）。
+1. 方式一：执行 `init-dm.sql`，创建 `SOFTDEMO` 模式与用户表（已存在则跳过）；
+2. 方式二：直接启动应用，由 `schema.sql` 自动建表（`IF NOT EXISTS` 幂等）。
 
 ## 表结构
 
@@ -25,16 +25,18 @@
 
 ```sql
 CREATE TABLE IF NOT EXISTS sys_user (
-    id            BIGINT       IDENTITY(1, 1) NOT NULL PRIMARY KEY,
-    username      VARCHAR(20)  NOT NULL,
-    nickname      VARCHAR(32),
-    avatar        VARCHAR(16),
-    password_hash VARCHAR(255) NOT NULL,
-    created_at    BIGINT,
-    last_login_at BIGINT,
-    CONSTRAINT uk_sys_user_username UNIQUE (username)
+    id            BIGINT       IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 用户主键，自增
+    username      VARCHAR(20)  NOT NULL,                            -- 登录用户名，全局唯一
+    nickname      VARCHAR(32),                                      -- 用户昵称，展示用
+    avatar        VARCHAR(16),                                      -- 头像标识（emoji）
+    password_hash VARCHAR(255) NOT NULL,                            -- PBKDF2 密码摘要，不存明文
+    created_at    BIGINT,                                           -- 创建时间，毫秒时间戳
+    last_login_at BIGINT,                                           -- 最近登录时间，毫秒时间戳
+    CONSTRAINT uk_sys_user_username UNIQUE (username)               -- 用户名唯一约束
 );
 ```
+
+每个字段均通过 `COMMENT ON COLUMN` 写入数据库注释，可在达梦管理工具中查看。
 
 > 达梦使用 `IDENTITY(1, 1)` 实现自增主键，不兼容 MySQL 的 `AUTO_INCREMENT`。
 > 若 `SOFTDEMO` 模式尚未创建，应用连接会失败，请先执行 `init-dm.sql`。
