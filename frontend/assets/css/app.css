@@ -13,7 +13,7 @@ body::before {
     justify-content: space-between;
     max-width: 1120px;
     margin: 0 auto;
-    padding: 32px 32px 0;
+    padding: 32px clamp(32px, 5vw, 72px) 0;
 }
 
 .brand-mark {
@@ -71,7 +71,7 @@ body::before {
 .home {
     max-width: 1120px;
     margin: 0 auto;
-    padding: clamp(64px, 12vh, 128px) 32px 60px;
+    padding: clamp(64px, 12vh, 128px) clamp(32px, 5vw, 72px) 60px;
     animation: fadeUp 0.8s var(--ease) both;
 }
 
@@ -120,6 +120,11 @@ body::before {
 
 .entry:last-child {
     border-right: none;
+}
+
+/* 第二、三列内容与左侧分隔线保持间距，避免标题贴线 */
+.entry + .entry {
+    padding-left: 28px;
 }
 
 .entry:hover {
@@ -233,11 +238,11 @@ body::before {
 
 @media (max-width: 820px) {
     .topbar {
-        padding: 24px 22px 0;
+        padding: 24px 28px 0;
     }
 
     .home {
-        padding: 44px 22px 48px;
+        padding: 44px 28px 48px;
     }
 
     .entries {
@@ -248,6 +253,11 @@ body::before {
         padding: 26px 0 30px;
         border-right: none;
         border-bottom: 1px solid var(--line);
+    }
+
+    /* 单列布局不需要列间距 */
+    .entry + .entry {
+        padding-left: 0;
     }
 
     .entry:last-child {
