@@ -23,8 +23,8 @@
     var busy = false;
 
     var TAB_COPY = {
-        login: { title: '欢迎回来', sub: '登录你的账号，继续心动旅程' },
-        register: { title: '创建账号', sub: '只需片刻，开始记录每一次心跳' }
+        login: { title: '欢迎回来', sub: '登录后继续你的记录' },
+        register: { title: '开始记录', sub: '创建账号，留下属于你的第一页' }
     };
 
     /* ================= Toast ================= */
@@ -130,7 +130,7 @@
         successOverlay.setAttribute('aria-hidden', 'false');
 
         window.setTimeout(function () {
-            window.location.href = config.gameUrl;
+            window.location.href = config.appUrl;
         }, 1150);
     }
 
@@ -142,7 +142,7 @@
             if (input) {
                 var visible = input.type === 'text';
                 input.type = visible ? 'password' : 'text';
-                eye.textContent = visible ? '👁' : '🙈';
+                eye.textContent = visible ? '显示' : '隐藏';
                 eye.setAttribute('aria-label', visible ? '显示密码' : '隐藏密码');
             }
             return;
@@ -254,7 +254,7 @@
 
     /* ================= 已登录视图操作 ================= */
     document.getElementById('continueBtn').addEventListener('click', function () {
-        window.location.href = config.gameUrl;
+        window.location.href = config.appUrl;
     });
 
     document.getElementById('logoutBtn').addEventListener('click', function () {

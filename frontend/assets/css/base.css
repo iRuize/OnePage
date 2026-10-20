@@ -1,22 +1,23 @@
 /* =========================================================
-   心动捕捉 · 基础样式
-   配色：蓝紫 / 樱粉 / 薄荷，浅色清新主题
+   一页 · 基础样式
+   配色：纸白 / 墨色 / 墨绿，简约记录风格
    ========================================================= */
 
 :root {
-    --ink: #1e2340;
-    --ink-soft: #565c7d;
-    --muted: #8b90a8;
-    --line: rgba(108, 114, 158, 0.14);
+    --paper: #f5f3ee;
+    --paper-deep: #ece8df;
+    --ink: #1b1b19;
+    --ink-soft: #4f4f49;
+    --muted: #96968c;
+    --line: rgba(27, 27, 25, 0.12);
+    --line-strong: rgba(27, 27, 25, 0.32);
+    --accent: #33473c;
+    --accent-deep: #26362d;
+    --danger: #a4463c;
 
-    --blue: #6a6cf0;
-    --violet: #8b6cf6;
-    --pink: #ff7eb6;
-    --mint: #5ed6c0;
-
-    --card-bg: rgba(255, 255, 255, 0.68);
-    --shadow-lg: 0 34px 90px -28px rgba(80, 86, 160, 0.45);
-    --shadow-md: 0 18px 44px -18px rgba(80, 86, 160, 0.35);
+    --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 
     --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
 }
@@ -33,16 +34,23 @@ body {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
-        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-family: var(--sans);
     color: var(--ink);
-    background:
-        radial-gradient(1200px 800px at 12% 8%, #eef1ff 0%, transparent 60%),
-        radial-gradient(1000px 700px at 88% 92%, #ffeef6 0%, transparent 62%),
-        linear-gradient(160deg, #f8faff 0%, #f3f6ff 45%, #fff2f8 100%);
+    background: var(--paper);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+}
+
+/* 右侧淡色分区，形成克制的左右层次 */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: 42%;
+    background: var(--paper-deep);
+    z-index: 0;
+    pointer-events: none;
 }
 
 button,
@@ -55,106 +63,27 @@ button {
 }
 
 ::selection {
-    background: rgba(106, 108, 240, 0.18);
+    background: rgba(51, 71, 60, 0.16);
 }
 
-/* ---------- 背景层：粒子画布 ---------- */
-.bg-canvas {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* ---------- 背景层：极光光斑 ---------- */
-.aurora {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.aurora i {
-    position: absolute;
-    display: block;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.5;
-    animation: drift 26s var(--ease) infinite alternate;
-}
-
-.aurora i:nth-child(1) {
-    width: 42vw;
-    height: 42vw;
-    left: -10%;
-    top: -14%;
-    background: radial-gradient(circle, #ffd0e4 0%, rgba(255, 208, 228, 0) 68%);
-    animation-duration: 26s;
-}
-
-.aurora i:nth-child(2) {
-    width: 38vw;
-    height: 38vw;
-    right: -8%;
-    top: 6%;
-    background: radial-gradient(circle, #cfd4ff 0%, rgba(207, 212, 255, 0) 68%);
-    animation-duration: 32s;
-    animation-delay: -6s;
-}
-
-.aurora i:nth-child(3) {
-    width: 34vw;
-    height: 34vw;
-    left: 18%;
-    bottom: -16%;
-    background: radial-gradient(circle, #c8f4ec 0%, rgba(200, 244, 236, 0) 68%);
-    animation-duration: 29s;
-    animation-delay: -12s;
-}
-
-.aurora i:nth-child(4) {
-    width: 30vw;
-    height: 30vw;
-    right: 12%;
-    bottom: -10%;
-    background: radial-gradient(circle, #ffe7c9 0%, rgba(255, 231, 201, 0) 68%);
-    animation-duration: 35s;
-    animation-delay: -18s;
-}
-
-@keyframes drift {
-    0% {
-        transform: translate3d(0, 0, 0) scale(1);
-    }
-    50% {
-        transform: translate3d(3vw, -2vh, 0) scale(1.08);
-    }
-    100% {
-        transform: translate3d(-2vw, 3vh, 0) scale(0.96);
-    }
-}
-
-/* ---------- 通用工具 ---------- */
 [hidden] {
     display: none !important;
 }
 
 .link {
     border: none;
+    border-bottom: 1px solid var(--line-strong);
     background: none;
-    color: var(--blue);
-    font-size: 13.5px;
-    font-weight: 600;
+    color: var(--ink);
+    font-size: 12.5px;
+    line-height: 1.6;
     padding: 0;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s ease;
 }
 
 .link:hover {
-    color: var(--violet);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    border-color: var(--ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

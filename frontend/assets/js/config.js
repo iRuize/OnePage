@@ -4,5 +4,5 @@
  */
 window.LOVE_CONFIG = {
     apiBase: 'http://localhost:8080',
-    gameUrl: 'game/heart-catch.html'
+    appUrl: 'app.html'
 };

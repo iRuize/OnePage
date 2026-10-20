@@ -1,6 +1,6 @@
 # 心动捕捉 · HeartCatch
 
-一个前后端分离的恋爱主题小游戏项目：包含华丽的登录 / 注册界面，以及一款单人向的「心动捕捉」小游戏。
+一个前后端分离的个人记录项目：包含简约大气的登录 / 注册界面，以及日记、账本、随笔的个人空间入口（另保留一款单人小游戏页面）。
 
 ## 项目结构
 
@@ -31,14 +31,16 @@ love/
 │
 ├── frontend/                         # 前端静态站点（零构建，原生 HTML/CSS/JS）
 │   ├── index.html                        登录 / 注册页
+│   ├── app.html                          个人空间（日记 / 账本 / 随笔）
 │   ├── assets/
-│   │   ├── css/base.css                  基础样式与背景
+│   │   ├── css/base.css                  基础样式与配色
 │   │   ├── css/login.css                 登录页样式
+│   │   ├── css/app.css                   个人空间样式
 │   │   └── js/
 │   │       ├── config.js                 API 地址与跳转配置
 │   │       ├── api.js                    接口封装
-│   │       ├── bg.js                     粒子背景
-│   │       └── login.js                  登录页交互
+│   │       ├── login.js                  登录页交互
+│   │       └── app.js                    个人空间交互
 │   └── game/heart-catch.html             心动捕捉小游戏
 │
 └── README.md
