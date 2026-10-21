@@ -1,6 +1,6 @@
-# 心动捕捉 · HeartCatch
+# 一页 · 个人记录
 
-一个前后端分离的个人记录项目：包含简约大气的登录 / 注册界面，以及日记、账本、随笔的个人空间入口（另保留一款单人小游戏页面）。
+一个前后端分离的个人记录项目：包含简约大气的登录 / 注册界面，以及日记、账本、随笔的个人空间入口。
 
 ## 项目结构
 
@@ -29,19 +29,19 @@ love/
 │               ├── init-dm.sql           创建 SOFTDEMO 模式
 │               └── schema.sql            建表脚本
 │
-├── frontend/                         # 前端静态站点（零构建，原生 HTML/CSS/JS）
-│   ├── index.html                        登录 / 注册页
-│   ├── app.html                          个人空间（日记 / 账本 / 随笔）
-│   ├── assets/
-│   │   ├── css/base.css                  基础样式与配色
-│   │   ├── css/login.css                 登录页样式
-│   │   ├── css/app.css                   个人空间样式
-│   │   └── js/
-│   │       ├── config.js                 API 地址与跳转配置
-│   │       ├── api.js                    接口封装
-│   │       ├── login.js                  登录页交互
-│   │       └── app.js                    个人空间交互
-│   └── game/heart-catch.html             心动捕捉小游戏
+├── frontend/                         # 前端（Vue 3 + Vite）
+│   ├── package.json                      依赖与脚本
+│   ├── vite.config.js                    Vite 配置、/api 代理
+│   ├── index.html                        Vite 入口
+│   └── src/
+│       ├── main.js                       应用入口
+│       ├── App.vue                       根组件（全局 Toast）
+│       ├── router/index.js               路由与登录守卫
+│       ├── api/auth.js                   认证接口封装
+│       ├── composables/useToast.js       Toast 单例
+│       ├── views/LoginView.vue           登录 / 注册页
+│       ├── views/HomeView.vue            个人空间
+│       └── assets/styles/                基础、登录、主页样式
 │
 └── README.md
 ```
@@ -71,7 +71,7 @@ Database（SOFTDEMO.sys_user 表）
 | 后端 | JDK 8、Spring Boot 2.7.17、Spring MVC、Bean Validation、Lombok |
 | 持久层 | MyBatis-Plus 3.5.4 + 达梦 DM8（DmJdbcDriver18） |
 | 认证 | PBKDF2WithHmacSHA256 密码摘要 + HMAC-SHA256 无状态 Token |
-| 前端 | 原生 HTML / CSS / JavaScript（无构建、无框架） |
+| 前端 | Vue 3.5 + Vue Router 4 + Vite 6 |
 
 ## 启动方式
 
@@ -89,21 +89,23 @@ mvn spring-boot:run
 
 ### 2. 启动前端
 
-前端为纯静态站点，任选一种方式：
-
 ```bash
-# 方式一：Python
 cd frontend
-python -m http.server 5173
-
-# 方式二：Node
-cd frontend
-npx serve -l 5173
+npm install
+npm run dev
 ```
 
 浏览器访问 `http://localhost:5173`。
 
-> 也可直接双击 `frontend/index.html` 打开；后端已配置 CORS，允许跨域访问。
+Vite 已配置 `/api` 代理到 `http://localhost:8080`，开发时无需额外处理跨域。
+
+生产构建：
+
+```bash
+npm run build
+```
+
+产物输出到 `frontend/dist`。
 
 ### 常见问题
 
@@ -127,7 +129,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
 
 **端口不一致**
 
-后端默认 `8080`，前端示例使用 `5173`。若修改后端端口，请同步修改 `frontend/assets/js/config.js` 中的 `apiBase`。
+后端默认 `8080`，前端 Vite 默认 `5173`。若修改后端端口，请同步修改 `frontend/vite.config.js` 中 `/api` 代理的 `target`。
 
 ## 接口说明
 
