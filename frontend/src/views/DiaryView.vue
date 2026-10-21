@@ -41,11 +41,11 @@
                     </div>
 
                     <div class="diary-body">
-                        <div class="diary-meta">
+                        <div class="diary-title-row">
+                            <h2>{{ item.title }}</h2>
                             <span v-if="item.mood" class="diary-mood">{{ moodLabel(item.mood) }}</span>
-                            <span>{{ formatWeek(item.createdAt) }}</span>
+                            <span class="diary-week">{{ formatWeek(item.createdAt) }}</span>
                         </div>
-                        <h2>{{ item.title }}</h2>
                         <p>{{ excerpt(item.content) }}</p>
                     </div>
 

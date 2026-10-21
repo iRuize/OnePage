@@ -21,17 +21,26 @@ export async function request(path, options = {}) {
         }
     }
 
+    const controller = new AbortController()
+    const timer = window.setTimeout(() => controller.abort(), 15000)
+
     let response
     try {
         response = await fetch(API_BASE + path, {
             ...rest,
             headers,
+            signal: controller.signal,
             body: body === undefined
                 ? undefined
                 : (body instanceof FormData ? body : JSON.stringify(body))
         })
     } catch (e) {
+        if (e.name === 'AbortError') {
+            throw new Error('请求超时，请检查后端服务是否正常')
+        }
         throw new Error('无法连接服务器，请确认后端已启动')
+    } finally {
+        window.clearTimeout(timer)
     }
 
     const result = await response.json().catch(() => null)
