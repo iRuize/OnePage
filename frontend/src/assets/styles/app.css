@@ -107,7 +107,7 @@
 
 .entry {
     position: relative;
-    padding: 40px 28px 52px 0;
+    padding: 40px 28px 52px 28px;
     border-right: 1px solid var(--line);
     color: var(--ink);
     text-decoration: none;
@@ -116,11 +116,6 @@
 
 .entry:last-child {
     border-right: none;
-}
-
-/* 第二、三列内容与左侧分隔线保持间距，避免标题贴线 */
-.entry + .entry {
-    padding-left: 28px;
 }
 
 .entry:hover {
@@ -220,11 +215,6 @@
         padding: 26px 0 30px;
         border-right: none;
         border-bottom: 1px solid var(--line);
-    }
-
-    /* 单列布局不需要列间距 */
-    .entry + .entry {
-        padding-left: 0;
     }
 
     .entry:last-child {
