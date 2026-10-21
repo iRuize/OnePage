@@ -38,6 +38,25 @@ CREATE TABLE IF NOT EXISTS sys_user (
 
 每个字段均通过 `COMMENT ON COLUMN` 写入数据库注释，可在达梦管理工具中查看。
 
+### 日记表 sys_diary
+
+```sql
+CREATE TABLE IF NOT EXISTS sys_diary (
+    id          BIGINT        IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 日记主键，自增
+    user_id     BIGINT        NOT NULL,                            -- 所属用户 ID
+    title       VARCHAR(100)  NOT NULL,                            -- 日记标题
+    content     CLOB,                                              -- 日记正文
+    mood        VARCHAR(20),                                       -- 心情标识
+    images      VARCHAR(2000),                                     -- 图片地址，逗号分隔
+    created_at  BIGINT        NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                             -- 更新时间，毫秒时间戳
+);
+```
+
+- 图片保存在 `backend/data/uploads/yyyyMM/` 下，通过 `/uploads/**` 静态映射访问；
+- 单张上限 `10MB`，仅支持 `jpg`、`jpeg`、`png`、`gif`、`webp`；
+- 列表查询使用索引 `IDX_DIARY_USER_CREATED (USER_ID, CREATED_AT)`。
+
 > 达梦使用 `IDENTITY(1, 1)` 实现自增主键，不兼容 MySQL 的 `AUTO_INCREMENT`。
 > 若 `SOFTDEMO` 模式尚未创建，应用连接会失败，请先执行 `init-dm.sql`。
 

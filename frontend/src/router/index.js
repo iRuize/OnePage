@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '../views/LoginView.vue'
 import HomeView from '../views/HomeView.vue'
+import DiaryView from '../views/DiaryView.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -8,6 +9,7 @@ const router = createRouter({
         { path: '/', redirect: '/login' },
         { path: '/login', name: 'login', component: LoginView },
         { path: '/home', name: 'home', component: HomeView, meta: { requiresAuth: true } },
+        { path: '/diary', name: 'diary', component: DiaryView, meta: { requiresAuth: true } },
         { path: '/:pathMatch(.*)*', redirect: '/login' }
     ]
 })

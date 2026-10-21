@@ -28,3 +28,29 @@ COMMENT ON COLUMN sys_user.avatar IS '头像标识（emoji）';
 COMMENT ON COLUMN sys_user.password_hash IS 'PBKDF2 密码摘要，不保存明文密码';
 COMMENT ON COLUMN sys_user.created_at IS '创建时间（毫秒时间戳）';
 COMMENT ON COLUMN sys_user.last_login_at IS '最近登录时间（毫秒时间戳）';
+
+-- =========================================================
+-- 日记表
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS sys_diary (
+    id          BIGINT        IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 日记主键，自增
+    user_id     BIGINT        NOT NULL,                            -- 所属用户 ID
+    title       VARCHAR(100)  NOT NULL,                            -- 日记标题
+    content     CLOB,                                              -- 日记正文
+    mood        VARCHAR(20),                                       -- 心情标识
+    images      VARCHAR(2000),                                     -- 图片地址，逗号分隔
+    created_at  BIGINT        NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                             -- 更新时间，毫秒时间戳
+);
+
+COMMENT ON TABLE sys_diary IS '日记表：用户日记内容与图片';
+
+COMMENT ON COLUMN sys_diary.id IS '日记主键，自增';
+COMMENT ON COLUMN sys_diary.user_id IS '所属用户 ID，关联 sys_user.id';
+COMMENT ON COLUMN sys_diary.title IS '日记标题';
+COMMENT ON COLUMN sys_diary.content IS '日记正文';
+COMMENT ON COLUMN sys_diary.mood IS '心情标识（calm/happy/down/tired/hope）';
+COMMENT ON COLUMN sys_diary.images IS '图片地址，多个以英文逗号分隔';
+COMMENT ON COLUMN sys_diary.created_at IS '创建时间（毫秒时间戳）';
+COMMENT ON COLUMN sys_diary.updated_at IS '更新时间（毫秒时间戳）';

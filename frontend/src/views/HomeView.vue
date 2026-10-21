@@ -20,7 +20,7 @@
                     :key="entry.index"
                     class="entry"
                     href="javascript:void(0)"
-                    @click="openFeature(entry.name)"
+                    @click="openFeature(entry)"
                 >
                     <span class="entry-index">{{ entry.index }}</span>
                     <h2>{{ entry.name }}</h2>
@@ -47,7 +47,7 @@ const user = ref(JSON.parse(localStorage.getItem('love_user') || 'null') || {})
 const displayName = computed(() => user.value.nickname || user.value.username || '朋友')
 
 const entries = [
-    { index: '01', name: '日记', desc: '记录一天里值得记住的片段。' },
+    { index: '01', name: '日记', desc: '记录一天里值得记住的片段。', path: '/diary' },
     { index: '02', name: '账本', desc: '收入与支出，心里有数。' },
     { index: '03', name: '随笔', desc: '没有主题的念头，也值得留下。' }
 ]
@@ -62,8 +62,12 @@ const greeting = hour < 5 ? '夜深了'
         : hour < 14 ? '午安'
             : hour < 18 ? '下午好' : '晚上好'
 
-function openFeature(name) {
-    showToast(`${name}功能正在准备中`)
+function openFeature(entry) {
+    if (entry.path) {
+        router.push(entry.path)
+        return
+    }
+    showToast(`${entry.name}功能正在准备中`)
 }
 
 function handleLogout() {

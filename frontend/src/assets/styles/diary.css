@@ -1,0 +1,434 @@
+/* =========================================================
+   一页 · 日记
+   ========================================================= */
+
+.diary-main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: clamp(48px, 8vh, 88px) clamp(32px, 5vw, 72px) 80px;
+}
+
+/* ---------- 页头 ---------- */
+.diary-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 34px;
+    border-bottom: 1px solid var(--line);
+}
+
+.diary-kicker {
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--muted);
+    margin-bottom: 14px;
+}
+
+.diary-head h1 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 5vw, 62px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+}
+
+.diary-sub {
+    margin-top: 12px;
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+}
+
+.diary-head .btn-primary {
+    flex: none;
+    width: auto;
+    height: 46px;
+    padding: 0 30px;
+}
+
+/* ---------- 列表 ---------- */
+.diary-list {
+    margin-top: 6px;
+}
+
+.diary-item {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) 92px 48px;
+    gap: 26px;
+    align-items: center;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--line);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.diary-item:hover {
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.diary-date {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: var(--muted);
+}
+
+.diary-date .day {
+    font-family: var(--serif);
+    font-size: 34px;
+    line-height: 1;
+    color: var(--ink);
+}
+
+.diary-date .month {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+}
+
+.diary-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+.diary-mood {
+    color: var(--accent);
+}
+
+.diary-body h2 {
+    margin-top: 7px;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+}
+
+.diary-body > p {
+    margin-top: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--muted);
+}
+
+.diary-thumb img {
+    display: block;
+    width: 92px;
+    height: 92px;
+    object-fit: cover;
+    filter: saturate(0.92);
+}
+
+.diary-delete {
+    justify-self: end;
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.diary-item:hover .diary-delete {
+    opacity: 1;
+}
+
+.diary-delete:hover {
+    color: var(--danger);
+}
+
+/* ---------- 空状态 ---------- */
+.diary-state,
+.diary-empty {
+    padding: 96px 0;
+    text-align: center;
+    color: var(--muted);
+}
+
+.diary-empty .empty-mark {
+    font-family: var(--serif);
+    font-size: 28px;
+    color: var(--line-strong);
+    margin-bottom: 16px;
+}
+
+.diary-empty h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.diary-empty p {
+    margin: 10px 0 26px;
+    font-size: 13px;
+}
+
+.diary-empty .btn-primary {
+    width: auto;
+    height: 46px;
+    padding: 0 32px;
+}
+
+/* ---------- 编辑抽屉 ---------- */
+.drawer-mask {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: flex;
+    justify-content: flex-end;
+    background: rgba(27, 27, 25, 0.35);
+}
+
+.diary-drawer {
+    display: flex;
+    flex-direction: column;
+    width: min(560px, 100%);
+    height: 100%;
+    background: var(--paper);
+    box-shadow: -24px 0 70px -34px rgba(0, 0, 0, 0.45);
+}
+
+.drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--line);
+}
+
+.drawer-head h2 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.drawer-close {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--muted);
+}
+
+.drawer-close:hover {
+    color: var(--ink);
+}
+
+.drawer-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 26px 32px 32px;
+}
+
+.drawer-date {
+    margin-bottom: 16px;
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+}
+
+.title-input {
+    width: 100%;
+    padding: 6px 0 14px;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    background: transparent;
+    outline: none;
+    font-family: var(--serif);
+    font-size: 26px;
+    color: var(--ink);
+}
+
+.title-input::placeholder {
+    color: #b8b8ae;
+}
+
+.mood-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 22px 0;
+}
+
+.mood-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.mood-btn:hover {
+    border-color: var(--line-strong);
+    color: var(--ink);
+}
+
+.mood-btn.active {
+    border-color: var(--accent);
+    background: rgba(51, 71, 60, 0.06);
+    color: var(--accent);
+}
+
+.content-input {
+    width: 100%;
+    min-height: 220px;
+    padding: 18px 0;
+    border: none;
+    border-top: 1px solid var(--line);
+    background: transparent;
+    outline: none;
+    resize: vertical;
+    font-size: 14px;
+    line-height: 2;
+    color: var(--ink);
+}
+
+.content-input::placeholder {
+    color: #b8b8ae;
+}
+
+/* ---------- 图片上传 ---------- */
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.upload-item,
+.upload-add {
+    position: relative;
+    aspect-ratio: 1;
+}
+
+.upload-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-remove {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(27, 27, 25, 0.65);
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.upload-add {
+    display: grid;
+    place-items: center;
+    border: 1px dashed var(--line-strong);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.upload-add:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+.upload-error {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--danger);
+}
+
+/* ---------- 抽屉底部 ---------- */
+.drawer-foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 32px;
+    border-top: 1px solid var(--line);
+}
+
+.drawer-foot .btn-primary,
+.drawer-foot .btn-ghost {
+    width: auto;
+    height: 46px;
+    margin-top: 0;
+    padding: 0 30px;
+}
+
+/* ---------- 抽屉动画 ---------- */
+.drawer-enter-active,
+.drawer-leave-active {
+    transition: opacity 0.25s ease;
+}
+
+.drawer-enter-active .diary-drawer,
+.drawer-leave-active .diary-drawer {
+    transition: transform 0.32s var(--ease);
+}
+
+.drawer-enter-from,
+.drawer-leave-to {
+    opacity: 0;
+}
+
+.drawer-enter-from .diary-drawer,
+.drawer-leave-to .diary-drawer {
+    transform: translateX(100%);
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 760px) {
+    .diary-main {
+        padding: 36px 22px 60px;
+    }
+
+    .diary-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .diary-item {
+        grid-template-columns: 64px minmax(0, 1fr) 40px;
+        gap: 16px;
+    }
+
+    .diary-thumb {
+        display: none;
+    }
+
+    .diary-date .day {
+        font-size: 26px;
+    }
+
+    .diary-delete {
+        opacity: 1;
+    }
+
+    .drawer-head,
+    .drawer-body,
+    .drawer-foot {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+}

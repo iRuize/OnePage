@@ -37,11 +37,14 @@ love/
 │       ├── main.js                       应用入口
 │       ├── App.vue                       根组件（全局 Toast）
 │       ├── router/index.js               路由与登录守卫
-│       ├── api/auth.js                   认证接口封装
+│       ├── api/request.js                统一请求封装
+│       ├── api/auth.js                   认证接口
+│       ├── api/diary.js                  日记与上传接口
 │       ├── composables/useToast.js       Toast 单例
 │       ├── views/LoginView.vue           登录 / 注册页
 │       ├── views/HomeView.vue            个人空间
-│       └── assets/styles/                基础、登录、主页样式
+│       ├── views/DiaryView.vue           日记列表与编辑
+│       └── assets/styles/                基础、登录、主页、日记样式
 │
 └── README.md
 ```
@@ -140,6 +143,12 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
 | GET | `/api/auth/me` | 获取当前用户 | 是 |
 | POST | `/api/auth/logout` | 退出登录 | 是 |
 | GET | `/api/auth/check-username` | 校验用户名是否可用 | 否 |
+| GET | `/api/diaries` | 日记列表 | 是 |
+| GET | `/api/diaries/{id}` | 日记详情 | 是 |
+| POST | `/api/diaries` | 新建日记 | 是 |
+| PUT | `/api/diaries/{id}` | 更新日记 | 是 |
+| DELETE | `/api/diaries/{id}` | 删除日记 | 是 |
+| POST | `/api/upload/image` | 上传日记图片 | 是 |
 
 ### 请求示例
 
