@@ -59,3 +59,5 @@ love:
 logging:
   level:
     com.love: info
+    # 打印 Mapper 执行的 SQL 与参数
+    com.love.mapper: debug
