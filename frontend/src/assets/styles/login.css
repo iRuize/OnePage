@@ -1,0 +1,575 @@
+/* =========================================================
+   一页 · 登录页样式
+   ========================================================= */
+
+.login-split {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: 42%;
+    background: var(--paper-deep);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.shell {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1180px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: clamp(48px, 7vh, 88px) clamp(24px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    align-items: center;
+    gap: clamp(48px, 7vw, 104px);
+}
+
+/* =========================================================
+   左侧品牌区
+   ========================================================= */
+.brand {
+    animation: fadeUp 0.8s var(--ease) both;
+}
+
+.brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: clamp(40px, 7vh, 72px);
+}
+
+.brand-mark::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 22px;
+    background: var(--accent);
+}
+
+.brand-mark span {
+    font-family: var(--serif);
+    font-size: 17px;
+    letter-spacing: 0.24em;
+}
+
+.brand h1 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 5.2vw, 74px);
+    font-weight: 500;
+    line-height: 1.24;
+    letter-spacing: 0.01em;
+}
+
+.brand-sub {
+    margin-top: 28px;
+    max-width: 24em;
+    font-size: 14.5px;
+    line-height: 2;
+    color: var(--ink-soft);
+}
+
+.brand-meta {
+    margin-top: clamp(36px, 6vh, 60px);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+}
+
+.brand-meta i {
+    display: block;
+    width: 1px;
+    height: 10px;
+    background: var(--line-strong);
+}
+
+.brand-foot {
+    margin-top: 14px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+}
+
+/* =========================================================
+   右侧表单区
+   ========================================================= */
+.auth-card {
+    justify-self: end;
+    width: 100%;
+    max-width: 380px;
+    animation: fadeUp 0.8s 0.1s var(--ease) both;
+}
+
+.card-head {
+    margin-bottom: 34px;
+}
+
+.card-title {
+    font-family: var(--serif);
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.card-sub {
+    margin-top: 10px;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+/* ---------- 登录 / 注册切换 ---------- */
+.segmented {
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 34px;
+}
+
+.seg-btn {
+    position: relative;
+    padding: 0 0 14px;
+    border: none;
+    background: transparent;
+    font-size: 13.5px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+
+.seg-btn:hover {
+    color: var(--ink-soft);
+}
+
+.seg-btn.active {
+    color: var(--ink);
+}
+
+.seg-btn.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1.5px;
+    background: var(--ink);
+}
+
+/* ---------- 表单 ---------- */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.field {
+    position: relative;
+    padding-top: 19px;
+    border-bottom: 1px solid var(--line);
+    transition: border-color 0.22s ease;
+}
+
+.field:focus-within {
+    border-color: var(--ink);
+}
+
+.field.invalid {
+    border-color: var(--danger);
+}
+
+.field label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+
+.field:focus-within label {
+    color: var(--ink);
+}
+
+.field.invalid label {
+    color: var(--danger);
+}
+
+.field input {
+    width: 100%;
+    height: 38px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 14.5px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+}
+
+.field input::placeholder {
+    color: #b8b8ae;
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+}
+
+.eye {
+    flex: none;
+    padding: 6px 0 6px 14px;
+    border: none;
+    background: none;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    transition: color 0.2s ease;
+}
+
+.eye:hover {
+    color: var(--ink);
+}
+
+.row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 2px;
+}
+
+.check {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    user-select: none;
+}
+
+.check input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.check .box {
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.check input:checked + .box {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.check input:checked + .box::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 7px;
+    border-right: 1.5px solid #fff;
+    border-bottom: 1.5px solid #fff;
+    transform: rotate(45deg);
+}
+
+.check input:focus-visible + .box {
+    outline: 1px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.link-muted {
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+}
+
+/* ---------- 主按钮 ---------- */
+.btn-primary {
+    position: relative;
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 2px;
+    background: var(--accent);
+    color: #f7f5f0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    transition: background 0.22s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--accent-deep);
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+    transition: opacity 0.16s ease;
+}
+
+.btn-primary.loading .btn-text {
+    opacity: 0;
+}
+
+.spinner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spin 0.8s linear infinite;
+}
+
+.btn-primary.loading .spinner {
+    opacity: 1;
+}
+
+.form-tip {
+    text-align: left;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+}
+
+/* ---------- 已登录视图 ---------- */
+.welcome {
+    animation: fadeUp 0.6s var(--ease) both;
+}
+
+.welcome-avatar {
+    width: 64px;
+    height: 64px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    font-size: 26px;
+    margin-bottom: 26px;
+}
+
+.welcome h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.welcome h2 span {
+    color: var(--accent);
+}
+
+.welcome p {
+    margin: 10px 0 30px;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+.btn-ghost {
+    width: 100%;
+    height: 46px;
+    margin-top: 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 12.5px;
+    letter-spacing: 0.12em;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-ghost:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+/* =========================================================
+   登录成功遮罩
+   ========================================================= */
+.success-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: rgba(27, 27, 25, 0.94);
+    color: #f5f3ee;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.32s ease, visibility 0.32s ease;
+}
+
+.success-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.success-mark {
+    font-family: var(--serif);
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: rgba(245, 243, 238, 0.55);
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(245, 243, 238, 0.25);
+    animation: fadeUp 0.6s var(--ease) both;
+}
+
+.success-title {
+    font-family: var(--serif);
+    font-size: 32px;
+    letter-spacing: 0.08em;
+    animation: fadeUp 0.6s 0.08s var(--ease) both;
+}
+
+.success-sub {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: rgba(245, 243, 238, 0.55);
+    animation: fadeUp 0.6s 0.16s var(--ease) both;
+}
+
+/* =========================================================
+   动画
+   ========================================================= */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes shake {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-6px);
+    }
+    40% {
+        transform: translateX(5px);
+    }
+    60% {
+        transform: translateX(-3px);
+    }
+    80% {
+        transform: translateX(2px);
+    }
+}
+
+.shake {
+    animation: shake 0.4s ease;
+}
+
+/* =========================================================
+   响应式
+   ========================================================= */
+@media (max-width: 900px) {
+    .login-split {
+        display: none;
+    }
+
+    .shell {
+        grid-template-columns: 1fr;
+        align-content: center;
+        gap: 44px;
+        max-width: 460px;
+        padding: 44px 24px 56px;
+    }
+
+    .brand-mark {
+        margin-bottom: 28px;
+    }
+
+    .brand h1 {
+        font-size: clamp(34px, 9vw, 44px);
+        line-height: 1.3;
+    }
+
+    .brand-sub {
+        margin-top: 18px;
+        font-size: 13.5px;
+        line-height: 1.9;
+    }
+
+    .brand-meta {
+        margin-top: 26px;
+    }
+
+    .brand-foot {
+        display: none;
+    }
+
+    .auth-card {
+        justify-self: stretch;
+        max-width: none;
+    }
+
+    .card-head {
+        margin-bottom: 28px;
+    }
+
+    .card-title {
+        font-size: 24px;
+    }
+}

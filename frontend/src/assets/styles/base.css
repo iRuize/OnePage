@@ -1,0 +1,148 @@
+/* =========================================================
+   一页 · 基础样式
+   配色：纸白 / 墨色 / 墨绿，简约记录风格
+   ========================================================= */
+
+:root {
+    --paper: #f5f3ee;
+    --paper-deep: #ece8df;
+    --ink: #1b1b19;
+    --ink-soft: #4f4f49;
+    --muted: #96968c;
+    --line: rgba(27, 27, 25, 0.12);
+    --line-strong: rgba(27, 27, 25, 0.32);
+    --accent: #33473c;
+    --accent-deep: #26362d;
+    --danger: #a4463c;
+
+    --serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+    --ease: cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+#app {
+    min-height: 100vh;
+}
+
+/* ---------- 全局 Toast ---------- */
+.toast-wrap {
+    position: fixed;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 80;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: min(90vw, 420px);
+    padding: 11px 18px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: #fbfaf7;
+    box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.25);
+    font-size: 12.5px;
+    color: var(--ink);
+}
+
+.toast .dot {
+    flex: none;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.toast.success .dot {
+    background: var(--accent);
+}
+
+.toast.error .dot {
+    background: var(--danger);
+}
+
+.toast.info .dot {
+    background: var(--ink-soft);
+}
+
+.toast-enter-active,
+.toast-leave-active {
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+::selection {
+    background: rgba(51, 71, 60, 0.16);
+}
+
+[hidden] {
+    display: none !important;
+}
+
+.link {
+    border: none;
+    border-bottom: 1px solid var(--line-strong);
+    background: none;
+    color: var(--ink);
+    font-size: 12.5px;
+    line-height: 1.6;
+    padding: 0;
+    letter-spacing: 0.04em;
+    transition: border-color 0.2s ease;
+}
+
+.link:hover {
+    border-color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
