@@ -7,7 +7,7 @@ server:
 
 spring:
   application:
-    name: love-backend
+    name: yiyue-backend
   datasource:
     # 达梦数据库（DM8），默认模式 SOFTDEMO
     driver-class-name: dm.jdbc.driver.DmDriver

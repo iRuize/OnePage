@@ -5,7 +5,7 @@
 ## 项目结构
 
 ```
-love/
+yiyue/
 ├── pom.xml                           # 聚合 POM（IDEA 导入根目录即可识别 Maven 多模块）
 │
 ├── backend/                          # 后端服务（Spring Boot）

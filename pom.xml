@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.love</groupId>
-    <artifactId>love-parent</artifactId>
+    <artifactId>yiyue-parent</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>love-parent</name>
-    <description>心动捕捉 · 前后端分离项目聚合构建</description>
+    <name>yiyue-parent</name>
+    <description>一页 · 前后端分离项目聚合构建</description>
 
     <modules>
         <module>backend</module>

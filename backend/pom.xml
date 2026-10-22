@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>com.love</groupId>
-    <artifactId>love-backend</artifactId>
+    <artifactId>yiyue-backend</artifactId>
     <version>1.0.0</version>
-    <name>love-backend</name>
-    <description>心动捕捉 · 前后端分离后端服务</description>
+    <name>yiyue-backend</name>
+    <description>一页 · 前后端分离后端服务</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -73,7 +73,7 @@
     </dependencies>
 
     <build>
-        <finalName>love-backend</finalName>
+        <finalName>yiyue-backend</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
