@@ -57,6 +57,40 @@ CREATE TABLE IF NOT EXISTS sys_diary (
 - 单张上限 `10MB`，仅支持 `jpg`、`jpeg`、`png`、`gif`、`webp`；
 - 列表查询使用索引 `IDX_DIARY_USER_CREATED (USER_ID, CREATED_AT)`。
 
+### 账本表 sys_bill
+
+```sql
+CREATE TABLE IF NOT EXISTS sys_bill (
+    id          BIGINT         IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 账单主键，自增
+    user_id     BIGINT         NOT NULL,                            -- 所属用户 ID
+    type        SMALLINT       NOT NULL,                            -- 类型：1 支出，2 收入
+    amount      DECIMAL(12, 2) NOT NULL,                            -- 金额
+    category    VARCHAR(32),                                        -- 分类
+    remark      VARCHAR(255),                                       -- 备注
+    bill_date   BIGINT         NOT NULL,                            -- 账单日期，毫秒时间戳
+    created_at  BIGINT         NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                              -- 更新时间，毫秒时间戳
+);
+```
+
+- `type` 使用 `1` 表示支出、`2` 表示收入；
+- 列表查询使用索引 `IDX_BILL_USER_DATE (USER_ID, BILL_DATE)`。
+
+### 随笔表 sys_essay
+
+```sql
+CREATE TABLE IF NOT EXISTS sys_essay (
+    id          BIGINT        IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 随笔主键，自增
+    user_id     BIGINT        NOT NULL,                            -- 所属用户 ID
+    title       VARCHAR(100)  NOT NULL,                            -- 随笔标题
+    content     CLOB,                                              -- 随笔正文
+    created_at  BIGINT        NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                             -- 更新时间，毫秒时间戳
+);
+```
+
+- 列表查询使用索引 `IDX_ESSAY_USER_CREATED (USER_ID, CREATED_AT)`。
+
 > 达梦使用 `IDENTITY(1, 1)` 实现自增主键，不兼容 MySQL 的 `AUTO_INCREMENT`。
 > 若 `SOFTDEMO` 模式尚未创建，应用连接会失败，请先执行 `init-dm.sql`。
 

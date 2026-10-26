@@ -48,8 +48,8 @@ const displayName = computed(() => user.value.nickname || user.value.username ||
 
 const entries = [
     { index: '01', name: '日记', desc: '记录一天里值得记住的片段。', path: '/diary' },
-    { index: '02', name: '账本', desc: '收入与支出，心里有数。' },
-    { index: '03', name: '随笔', desc: '没有主题的念头，也值得留下。' }
+    { index: '02', name: '账本', desc: '收入与支出，心里有数。', path: '/bill' },
+    { index: '03', name: '随笔', desc: '没有主题的念头，也值得留下。', path: '/essay' }
 ]
 
 const now = new Date()

@@ -60,3 +60,51 @@ COMMENT ON COLUMN SOFTDEMO.SYS_DIARY.UPDATED_AT IS '更新时间（毫秒时间�
 
 -- 7. 日记列表查询索引（用户 + 创建时间）
 CREATE INDEX IDX_DIARY_USER_CREATED ON SOFTDEMO.SYS_DIARY (USER_ID, CREATED_AT);
+
+-- 8. 账本表
+CREATE TABLE IF NOT EXISTS SOFTDEMO.SYS_BILL (
+    id          BIGINT         IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 账单主键，自增
+    user_id     BIGINT         NOT NULL,                            -- 所属用户 ID
+    type        SMALLINT       NOT NULL,                            -- 类型：1 支出，2 收入
+    amount      DECIMAL(12, 2) NOT NULL,                            -- 金额
+    category    VARCHAR(32),                                        -- 分类
+    remark      VARCHAR(255),                                       -- 备注
+    bill_date   BIGINT         NOT NULL,                            -- 账单日期，毫秒时间戳
+    created_at  BIGINT         NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                              -- 更新时间，毫秒时间戳
+);
+
+COMMENT ON TABLE SOFTDEMO.SYS_BILL IS '账本表：用户收支记录';
+
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.ID IS '账单主键，自增';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.USER_ID IS '所属用户 ID，关联 sys_user.id';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.TYPE IS '类型：1 支出，2 收入';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.AMOUNT IS '金额';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.CATEGORY IS '分类';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.REMARK IS '备注';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.BILL_DATE IS '账单日期（毫秒时间戳）';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.CREATED_AT IS '创建时间（毫秒时间戳）';
+COMMENT ON COLUMN SOFTDEMO.SYS_BILL.UPDATED_AT IS '更新时间（毫秒时间戳）';
+
+CREATE INDEX IDX_BILL_USER_DATE ON SOFTDEMO.SYS_BILL (USER_ID, BILL_DATE);
+
+-- 9. 随笔表
+CREATE TABLE IF NOT EXISTS SOFTDEMO.SYS_ESSAY (
+    id          BIGINT        IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 随笔主键，自增
+    user_id     BIGINT        NOT NULL,                            -- 所属用户 ID
+    title       VARCHAR(100)  NOT NULL,                            -- 随笔标题
+    content     CLOB,                                              -- 随笔正文
+    created_at  BIGINT        NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                             -- 更新时间，毫秒时间戳
+);
+
+COMMENT ON TABLE SOFTDEMO.SYS_ESSAY IS '随笔表：用户的短篇随笔';
+
+COMMENT ON COLUMN SOFTDEMO.SYS_ESSAY.ID IS '随笔主键，自增';
+COMMENT ON COLUMN SOFTDEMO.SYS_ESSAY.USER_ID IS '所属用户 ID，关联 sys_user.id';
+COMMENT ON COLUMN SOFTDEMO.SYS_ESSAY.TITLE IS '随笔标题';
+COMMENT ON COLUMN SOFTDEMO.SYS_ESSAY.CONTENT IS '随笔正文';
+COMMENT ON COLUMN SOFTDEMO.SYS_ESSAY.CREATED_AT IS '创建时间（毫秒时间戳）';
+COMMENT ON COLUMN SOFTDEMO.SYS_ESSAY.UPDATED_AT IS '更新时间（毫秒时间戳）';
+
+CREATE INDEX IDX_ESSAY_USER_CREATED ON SOFTDEMO.SYS_ESSAY (USER_ID, CREATED_AT);

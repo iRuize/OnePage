@@ -1,0 +1,14 @@
+/* =========================================================
+   一页 · 随笔
+   复用日记页布局，仅调整列表列数（无缩略图）
+   ========================================================= */
+
+.essay-page .diary-item {
+    grid-template-columns: 92px minmax(0, 1fr) 48px;
+}
+
+@media (max-width: 760px) {
+    .essay-page .diary-item {
+        grid-template-columns: 64px minmax(0, 1fr) 40px;
+    }
+}

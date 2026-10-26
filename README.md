@@ -1,6 +1,6 @@
 # 一页 · 个人记录
 
-一个前后端分离的个人记录项目：包含简约大气的登录 / 注册界面，以及日记、账本、随笔的个人空间入口。
+一个前后端分离的个人记录项目：包含登录 / 注册、日记、账本与随笔四个模块，支持日记图片上传与账本月度收支统计。
 
 ## 项目结构
 
@@ -40,11 +40,15 @@ yiyue/
 │       ├── api/request.js                统一请求封装
 │       ├── api/auth.js                   认证接口
 │       ├── api/diary.js                  日记与上传接口
+│       ├── api/bill.js                   账本接口
+│       ├── api/essay.js                  随笔接口
 │       ├── composables/useToast.js       Toast 单例
 │       ├── views/LoginView.vue           登录 / 注册页
 │       ├── views/HomeView.vue            个人空间
 │       ├── views/DiaryView.vue           日记列表与编辑
-│       └── assets/styles/                基础、登录、主页、日记样式
+│       ├── views/BillView.vue            账本统计与记账
+│       ├── views/EssayView.vue           随笔列表与编辑
+│       └── assets/styles/                基础、登录、主页、日记、账本、随笔样式
 │
 └── README.md
 ```
@@ -149,6 +153,14 @@ mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
 | PUT | `/api/diaries/{id}` | 更新日记 | 是 |
 | DELETE | `/api/diaries/{id}` | 删除日记 | 是 |
 | POST | `/api/upload/image` | 上传日记图片 | 是 |
+| GET | `/api/bills` | 账单列表 | 是 |
+| POST | `/api/bills` | 新建账单 | 是 |
+| PUT | `/api/bills/{id}` | 更新账单 | 是 |
+| DELETE | `/api/bills/{id}` | 删除账单 | 是 |
+| GET | `/api/essays` | 随笔列表 | 是 |
+| POST | `/api/essays` | 新建随笔 | 是 |
+| PUT | `/api/essays/{id}` | 更新随笔 | 是 |
+| DELETE | `/api/essays/{id}` | 删除随笔 | 是 |
 
 ### 请求示例
 

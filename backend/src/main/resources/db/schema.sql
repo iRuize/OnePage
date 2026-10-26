@@ -54,3 +54,53 @@ COMMENT ON COLUMN sys_diary.mood IS '心情标识（calm/happy/down/tired/hope�
 COMMENT ON COLUMN sys_diary.images IS '图片地址，多个以英文逗号分隔';
 COMMENT ON COLUMN sys_diary.created_at IS '创建时间（毫秒时间戳）';
 COMMENT ON COLUMN sys_diary.updated_at IS '更新时间（毫秒时间戳）';
+
+-- =========================================================
+-- 账本表
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS sys_bill (
+    id          BIGINT         IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 账单主键，自增
+    user_id     BIGINT         NOT NULL,                            -- 所属用户 ID
+    type        SMALLINT       NOT NULL,                            -- 类型：1 支出，2 收入
+    amount      DECIMAL(12, 2) NOT NULL,                            -- 金额
+    category    VARCHAR(32),                                        -- 分类
+    remark      VARCHAR(255),                                       -- 备注
+    bill_date   BIGINT         NOT NULL,                            -- 账单日期，毫秒时间戳
+    created_at  BIGINT         NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                              -- 更新时间，毫秒时间戳
+);
+
+COMMENT ON TABLE sys_bill IS '账本表：用户收支记录';
+
+COMMENT ON COLUMN sys_bill.id IS '账单主键，自增';
+COMMENT ON COLUMN sys_bill.user_id IS '所属用户 ID，关联 sys_user.id';
+COMMENT ON COLUMN sys_bill.type IS '类型：1 支出，2 收入';
+COMMENT ON COLUMN sys_bill.amount IS '金额';
+COMMENT ON COLUMN sys_bill.category IS '分类';
+COMMENT ON COLUMN sys_bill.remark IS '备注';
+COMMENT ON COLUMN sys_bill.bill_date IS '账单日期（毫秒时间戳）';
+COMMENT ON COLUMN sys_bill.created_at IS '创建时间（毫秒时间戳）';
+COMMENT ON COLUMN sys_bill.updated_at IS '更新时间（毫秒时间戳）';
+
+-- =========================================================
+-- 随笔表
+-- =========================================================
+
+CREATE TABLE IF NOT EXISTS sys_essay (
+    id          BIGINT        IDENTITY(1, 1) NOT NULL PRIMARY KEY, -- 随笔主键，自增
+    user_id     BIGINT        NOT NULL,                            -- 所属用户 ID
+    title       VARCHAR(100)  NOT NULL,                            -- 随笔标题
+    content     CLOB,                                              -- 随笔正文
+    created_at  BIGINT        NOT NULL,                            -- 创建时间，毫秒时间戳
+    updated_at  BIGINT                                             -- 更新时间，毫秒时间戳
+);
+
+COMMENT ON TABLE sys_essay IS '随笔表：用户的短篇随笔';
+
+COMMENT ON COLUMN sys_essay.id IS '随笔主键，自增';
+COMMENT ON COLUMN sys_essay.user_id IS '所属用户 ID，关联 sys_user.id';
+COMMENT ON COLUMN sys_essay.title IS '随笔标题';
+COMMENT ON COLUMN sys_essay.content IS '随笔正文';
+COMMENT ON COLUMN sys_essay.created_at IS '创建时间（毫秒时间戳）';
+COMMENT ON COLUMN sys_essay.updated_at IS '更新时间（毫秒时间戳）';
