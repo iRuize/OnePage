@@ -35,9 +35,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useToast } from '../composables/useToast'
+import {computed, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {useToast} from '../composables/useToast'
 import '../assets/styles/app.css'
 
 const router = useRouter()

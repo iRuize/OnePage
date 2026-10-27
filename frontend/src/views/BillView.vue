@@ -133,10 +133,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { createBill, deleteBill, listBills, updateBill } from '../api/bill'
-import { useToast } from '../composables/useToast'
+import {computed, onMounted, reactive, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {createBill, deleteBill, listBills, updateBill} from '../api/bill'
+import {useToast} from '../composables/useToast'
 import '../assets/styles/app.css'
 import '../assets/styles/diary.css'
 import '../assets/styles/bill.css'

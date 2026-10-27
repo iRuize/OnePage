@@ -125,10 +125,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { createDiary, deleteDiary, listDiaries, updateDiary, uploadImage } from '../api/diary'
-import { useToast } from '../composables/useToast'
+import {computed, onMounted, reactive, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {createDiary, deleteDiary, listDiaries, updateDiary, uploadImage} from '../api/diary'
+import {useToast} from '../composables/useToast'
 import '../assets/styles/app.css'
 import '../assets/styles/diary.css'
 

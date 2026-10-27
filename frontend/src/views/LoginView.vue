@@ -200,10 +200,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { login, logout, me, register } from '../api/auth'
-import { useToast } from '../composables/useToast'
+import {computed, onMounted, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {login, logout, me, register} from '../api/auth'
+import {useToast} from '../composables/useToast'
 import '../assets/styles/login.css'
 
 const router = useRouter()

@@ -95,10 +95,10 @@
 </template>
 
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { createEssay, deleteEssay, listEssays, updateEssay } from '../api/essay'
-import { useToast } from '../composables/useToast'
+import {computed, onMounted, reactive, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import {createEssay, deleteEssay, listEssays, updateEssay} from '../api/essay'
+import {useToast} from '../composables/useToast'
 import '../assets/styles/app.css'
 import '../assets/styles/diary.css'
 import '../assets/styles/essay.css'
