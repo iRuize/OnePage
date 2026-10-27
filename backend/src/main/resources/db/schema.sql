@@ -1,6 +1,6 @@
 -- =========================================================
 -- 一页 · 登录注册表结构（达梦 DM8）
--- 表建在 SOFTDEMO 模式下（连接参数 schema=SOFTDEMO 指定）
+-- 表建在 ONEPAGE 模式下（连接参数 schema=ONEPAGE 指定）
 -- 每次应用启动执行，IF NOT EXISTS 保证幂等
 -- 说明：达梦使用 IDENTITY(seed, increment) 实现自增主键，
 --       不支持 MySQL 的 AUTO_INCREMENT 写法。

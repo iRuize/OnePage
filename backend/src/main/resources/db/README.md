@@ -1,22 +1,22 @@
 # 数据库说明
 
-项目使用本地达梦数据库 DM8，默认模式 `SOFTDEMO`，通过 MyBatis-Plus 访问。
+项目使用本地达梦数据库 DM8，默认模式 `ONEPAGE`，通过 MyBatis-Plus 访问。
 
 ## 连接信息
 
 | 项 | 值 |
 |----|----|
 | 驱动类 | `dm.jdbc.driver.DmDriver` |
-| JDBC URL | `jdbc:dm://localhost:5236?schema=SOFTDEMO` |
+| JDBC URL | `jdbc:dm://localhost:5236?schema=ONEPAGE` |
 | 用户名 | `SYSDBA` |
 | 密码 | `Duohereshui1` |
-| 模式 | `SOFTDEMO` |
+| 模式 | `ONEPAGE` |
 
 配置位于 `backend/src/main/resources/application.yml`，可通过环境变量 `DM_URL`、`DM_USERNAME`、`DM_PASSWORD` 覆盖。
 
 ## 初始化
 
-1. 方式一：执行 `init-dm.sql`，创建 `SOFTDEMO` 模式与用户表（已存在则跳过）；
+1. 方式一：执行 `init-dm.sql`，创建 `ONEPAGE` 模式与用户表（已存在则跳过）；
 2. 方式二：直接启动应用，由 `schema.sql` 自动建表（`IF NOT EXISTS` 幂等）。
 
 ## 表结构
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS sys_essay (
 - 列表查询使用索引 `IDX_ESSAY_USER_CREATED (USER_ID, CREATED_AT)`。
 
 > 达梦使用 `IDENTITY(1, 1)` 实现自增主键，不兼容 MySQL 的 `AUTO_INCREMENT`。
-> 若 `SOFTDEMO` 模式尚未创建，应用连接会失败，请先执行 `init-dm.sql`。
+> 若 `ONEPAGE` 模式尚未创建，应用连接会失败，请先执行 `init-dm.sql`。
 
 ## 配置项
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS sys_essay (
 | 配置 | 默认值 | 说明 |
 |------|--------|------|
 | `server.port` | `8080` | 服务端口 |
-| `spring.datasource.url` | `jdbc:dm://localhost:5236?schema=SOFTDEMO` | 达梦连接地址（可用 `DM_URL` 覆盖） |
+| `spring.datasource.url` | `jdbc:dm://localhost:5236?schema=ONEPAGE` | 达梦连接地址（可用 `DM_URL` 覆盖） |
 | `spring.datasource.username` | `SYSDBA` | 数据库用户名（可用 `DM_USERNAME` 覆盖） |
 | `spring.datasource.password` | `Duohereshui1` | 数据库密码（可用 `DM_PASSWORD` 覆盖） |
 | `spring.sql.init.schema-locations` | `classpath:db/schema.sql` | 建表脚本 |

@@ -9,9 +9,9 @@ spring:
   application:
     name: onepage-backend
   datasource:
-    # 达梦数据库（DM8），默认模式 SOFTDEMO
+    # 达梦数据库（DM8），默认模式 ONEPAGE
     driver-class-name: dm.jdbc.driver.DmDriver
-    url: "${DM_URL:jdbc:dm://localhost:5236?schema=SOFTDEMO}"
+    url: "${DM_URL:jdbc:dm://localhost:5236?schema=ONEPAGE}"
     username: ${DM_USERNAME:SYSDBA}
     password: ${DM_PASSWORD:Duohereshui1}
     hikari:

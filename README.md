@@ -26,7 +26,7 @@ onePage/
 │           ├── application.yml           端口、数据源、MyBatis-Plus 配置
 │           └── db/
 │               ├── README.md             数据库说明（连接、初始化、配置）
-│               ├── init-dm.sql           创建 SOFTDEMO 模式
+│               ├── init-dm.sql           创建 ONEPAGE 模式
 │               └── schema.sql            建表脚本
 │
 ├── frontend/                         # 前端（Vue 3 + Vite）
@@ -62,7 +62,7 @@ Service（服务层，接口 + 实现）
     ↓ 业务规则：注册查重、密码校验、Token 签发
 Mapper（数据访问层）
     ↓ MyBatis-Plus BaseMapper，访问达梦数据库
-Database（SOFTDEMO.sys_user 表）
+Database（ONEPAGE.sys_user 表）
 ```
 
 | 层 | 代码位置 | 职责 |
@@ -91,7 +91,7 @@ mvn spring-boot:run
 
 服务默认监听 `http://localhost:8080`。
 
-首次部署需先创建达梦 `SOFTDEMO` 模式，数据库连接、初始化与配置详见
+首次部署需先创建达梦 `ONEPAGE` 模式，数据库连接、初始化与配置详见
 [`backend/src/main/resources/db/README.md`](backend/src/main/resources/db/README.md)。
 
 ### 2. 启动前端
