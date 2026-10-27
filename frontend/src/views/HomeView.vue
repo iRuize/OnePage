@@ -43,7 +43,7 @@ import '../assets/styles/app.css'
 const router = useRouter()
 const { showToast } = useToast()
 
-const user = ref(JSON.parse(localStorage.getItem('love_user') || 'null') || {})
+const user = ref(JSON.parse(localStorage.getItem('onepage_user') || 'null') || {})
 const displayName = computed(() => user.value.nickname || user.value.username || '朋友')
 
 const entries = [
@@ -71,8 +71,8 @@ function openFeature(entry) {
 }
 
 function handleLogout() {
-    localStorage.removeItem('love_token')
-    localStorage.removeItem('love_user')
+    localStorage.removeItem('onepage_token')
+    localStorage.removeItem('onepage_user')
     router.replace('/login')
 }
 </script>

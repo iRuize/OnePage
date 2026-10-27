@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.love</groupId>
-    <artifactId>yiyue-parent</artifactId>
+    <groupId>com.onepage</groupId>
+    <artifactId>onepage-parent</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
-    <name>yiyue-parent</name>
+    <name>onepage-parent</name>
     <description>一页 · 前后端分离项目聚合构建</description>
 
     <modules>

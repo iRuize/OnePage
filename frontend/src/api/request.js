@@ -1,8 +1,8 @@
 const API_BASE = (import.meta.env.VITE_API_BASE || '/api').replace(/\/+$/, '')
 
-export const TOKEN_KEY = 'love_token'
+export const TOKEN_KEY = 'onepage_token'
 
-export const USER_KEY = 'love_user'
+export const USER_KEY = 'onepage_user'
 
 /**
  * 统一请求封装：JSON、Bearer Token、业务错误处理

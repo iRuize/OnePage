@@ -19,7 +19,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-    if (to.meta.requiresAuth && !localStorage.getItem('love_token')) {
+    if (to.meta.requiresAuth && !localStorage.getItem('onepage_token')) {
         return { name: 'login' }
     }
 })

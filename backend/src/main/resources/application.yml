@@ -7,7 +7,7 @@ server:
 
 spring:
   application:
-    name: yiyue-backend
+    name: onepage-backend
   datasource:
     # 达梦数据库（DM8），默认模式 SOFTDEMO
     driver-class-name: dm.jdbc.driver.DmDriver
@@ -47,10 +47,10 @@ mybatis-plus:
     db-config:
       id-type: auto
 
-love:
+onepage:
   auth:
     # 生产环境请替换为环境变量注入的随机密钥
-    secret: ${LOVE_AUTH_SECRET:love-heart-catch-demo-secret-change-me-in-production}
+    secret: ${ONEPAGE_AUTH_SECRET:onepage-demo-secret-change-me-in-production}
     token-ttl-hours: 168
   storage:
     # 日记图片上传目录（相对后端工作目录）
@@ -58,6 +58,6 @@ love:
 
 logging:
   level:
-    com.love: info
+    com.onepage: info
     # 打印 Mapper 执行的 SQL 与参数
-    com.love.mapper: debug
+    com.onepage.mapper: debug

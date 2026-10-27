@@ -5,14 +5,14 @@
 ## 项目结构
 
 ```
-yiyue/
+onePage/
 ├── pom.xml                           # 聚合 POM（IDEA 导入根目录即可识别 Maven 多模块）
 │
 ├── backend/                          # 后端服务（Spring Boot）
 │   ├── pom.xml
 │   └── src/main/
-│       ├── java/com/love/
-│       │   ├── LoveApplication.java      启动入口
+│       ├── java/com/onepage/
+│       │   ├── OnePageApplication.java      启动入口
 │       │   ├── controller/               【控制层】REST 接口
 │       │   ├── service/                  【服务层】业务接口
 │       │   ├── service/impl/             【服务层】业务实现

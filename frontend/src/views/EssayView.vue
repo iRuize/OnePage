@@ -106,7 +106,7 @@ import '../assets/styles/essay.css'
 const router = useRouter()
 const { showToast } = useToast()
 
-const user = ref(JSON.parse(localStorage.getItem('love_user') || 'null') || {})
+const user = ref(JSON.parse(localStorage.getItem('onepage_user') || 'null') || {})
 const displayName = computed(() => user.value.nickname || user.value.username || '朋友')
 
 const essays = ref([])

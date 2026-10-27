@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS sys_essay (
 | `spring.datasource.username` | `SYSDBA` | 数据库用户名（可用 `DM_USERNAME` 覆盖） |
 | `spring.datasource.password` | `Duohereshui1` | 数据库密码（可用 `DM_PASSWORD` 覆盖） |
 | `spring.sql.init.schema-locations` | `classpath:db/schema.sql` | 建表脚本 |
-| `love.auth.secret` | 演示密钥 | Token 签名密钥，生产环境务必替换 |
-| `love.auth.token-ttl-hours` | `168` | Token 有效期（小时），勾选「记住我」为 4 倍 |
+| `onepage.auth.secret` | 演示密钥 | Token 签名密钥，生产环境务必替换 |
+| `onepage.auth.token-ttl-hours` | `168` | Token 有效期（小时），勾选「记住我」为 4 倍 |
 
 前端 API 地址在 `frontend/assets/js/config.js` 中修改。
 

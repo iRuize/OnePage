@@ -144,7 +144,7 @@ import '../assets/styles/bill.css'
 const router = useRouter()
 const { showToast } = useToast()
 
-const user = ref(JSON.parse(localStorage.getItem('love_user') || 'null') || {})
+const user = ref(JSON.parse(localStorage.getItem('onepage_user') || 'null') || {})
 const displayName = computed(() => user.value.nickname || user.value.username || '朋友')
 
 const EXPENSE_CATEGORIES = ['餐饮', '交通', '购物', '居住', '娱乐', '医疗', '学习', '其他']

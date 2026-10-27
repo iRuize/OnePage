@@ -327,8 +327,8 @@ async function submitRegister() {
 }
 
 function handleAuthSuccess(data) {
-    localStorage.setItem('love_token', data.token)
-    localStorage.setItem('love_user', JSON.stringify(data.user))
+    localStorage.setItem('onepage_token', data.token)
+    localStorage.setItem('onepage_user', JSON.stringify(data.user))
     currentUser.value = data.user
     showSuccess.value = true
     window.setTimeout(() => {
@@ -344,21 +344,21 @@ function handleLogout() {
     logout().catch(() => {
         // Token 可能已过期，仍然清除本地状态
     })
-    localStorage.removeItem('love_token')
-    localStorage.removeItem('love_user')
+    localStorage.removeItem('onepage_token')
+    localStorage.removeItem('onepage_user')
     currentUser.value = null
     switchTab('login')
     showToast('已退出登录', 'info')
 }
 
 onMounted(async () => {
-    if (!localStorage.getItem('love_token')) {
+    if (!localStorage.getItem('onepage_token')) {
         return
     }
     try {
         currentUser.value = await me()
     } catch (e) {
-        localStorage.removeItem('love_token')
+        localStorage.removeItem('onepage_token')
     }
 })
 </script>
